@@ -5,7 +5,6 @@ if (-not (Get-AzContext)) {
     Connect-AzAccount -Identity
 }
 
-
 #Install the Resource Graph module from PowerShell Gallery
 if (-not (Get-Module -Name Az.ResourceGraph -ListAvailable)) {
     Install-Module -Name Az.ResourceGraph -Force
@@ -56,8 +55,7 @@ $allMachines | ForEach-Object {
     $subscriptionId = $split[2]; 
     $rg = $split[4];
     $name = $split[8];
-
-    Write-Output ("Subscription Id: " + $subscriptionId)
+    
     Write-Output ("Virtual Machine: " + $name)
 
 $vmargQuery = @"
