@@ -1,10 +1,14 @@
 # Make sure that we are using eventGridEvent for parameter binding in Azure function.
 param($eventGridEvent, $TriggerMetadata)
 
-Connect-AzAccount -Identity
+if (-not (Get-AzContext)) {
+    Connect-AzAccount -Identity
+}
 
-# Install the Resource Graph module from PowerShell Gallery
-Install-Module -Name Az.ResourceGraph
+#Install the Resource Graph module from PowerShell Gallery
+if (-not (Get-Module -Name Az.ResourceGraph -ListAvailable)) {
+    Install-Module -Name Az.ResourceGraph -Force
+}
 
 $maintenanceRunId = $eventGridEvent.data.CorrelationId
 $resourceSubscriptionIds = $eventGridEvent.data.ResourceSubscriptionIds
