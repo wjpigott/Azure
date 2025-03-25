@@ -64,7 +64,7 @@ if ($allMachines.Count -eq 0) {
 # Define variables
 $resourceGroupName = $rg
 $machineName = $name
-$tagKey = "Patch"
+$tagKey = "PatchMonthly"
 $tagValue = "False"
 # Get the Arc-enabled machine
 $machine = Get-AzConnectedMachine -ResourceGroupName $resourceGroupName -Name $machineName
