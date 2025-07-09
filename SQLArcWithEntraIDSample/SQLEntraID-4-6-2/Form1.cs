@@ -129,20 +129,22 @@ TrustServerCertificate=True;";
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            string domain = Environment.UserDomainName;
-            string username = Environment.UserName;
+private async void button2_Click(object sender, EventArgs e)
+{
+    var accounts = await app.GetAccountsAsync();
+    var account = accounts.FirstOrDefault();
 
-            if (domain.Equals("azuread", StringComparison.OrdinalIgnoreCase))
-            {
-                MessageBox.Show($"Logged in with an Entra ID user: {domain}\\{username}", "User Check", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show($"Not logged in with an Entra ID user. Current user: {domain}\\{username}", "User Check", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
+    if (account != null)
+    {
+        MessageBox.Show($"Authenticated with Entra ID as: {account.Username}", "User Check", MessageBoxButtons.OK, MessageBoxIcon.Information);
+    }
+    else
+    {
+        string domain = Environment.UserDomainName;
+        string username = Environment.UserName;
+        MessageBox.Show($"Not authenticated with Entra ID in this app. Current Windows user: {domain}\\{username}", "User Check", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    }
+}
 
         private async Task<DataTable> FetchDataAsync()
         {
