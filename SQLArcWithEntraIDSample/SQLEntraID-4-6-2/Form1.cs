@@ -16,7 +16,6 @@ namespace SQLEntraID_4_6_2
 {
     public partial class Form1 : Form
     {
-        // Reuse credential objects to take advantage of underlying token caches.
         private static readonly ConcurrentDictionary<string, DefaultAzureCredential> credentials = new ConcurrentDictionary<string, DefaultAzureCredential>();
         private const string defaultScopeSuffix = "/.default";
 
@@ -55,43 +54,46 @@ namespace SQLEntraID_4_6_2
             }
         }
 
-        private async Task<AuthenticationResult> LoginAsync()
-        {
-            var app = PublicClientApplicationBuilder.Create("65fd1e99-ac4a-4d12-8519-9dc0c48a1702")
-                .WithAuthority(AzureCloudInstance.AzurePublic, "7da854e2-6115-4de1-bf5a-9e7af4fc3c98")
-                .WithRedirectUri("http://localhost")
-                .WithLogging((level, message, containsPii) => Debug.WriteLine($"MSAL: {message}"), LogLevel.Verbose, true, true)
-                .Build();
+        // Use a static app instance for in-memory cache to work across calls
+        private static IPublicClientApplication app = PublicClientApplicationBuilder.Create("65fd1e99-ac4a-4d12-8519-9dc0c48a1702")
+            .WithAuthority(AzureCloudInstance.AzurePublic, "7da854e2-6115-4de1-bf5a-9e7af4fc3c98")
+            .WithRedirectUri("http://localhost")
+            .WithLogging((level, message, containsPii) => Debug.WriteLine($"MSAL: {message}"), LogLevel.Verbose, true, true)
+            .Build();
 
-            // Enable persistent token caching
-            TokenCacheHelper.EnablePersistence(app.UserTokenCache);
+        private async Task<AuthenticationResult> LoginAsync(bool persistCache)
+        {
+            // Only enable persistence if requested
+            if (persistCache)
+                TokenCacheHelper.EnablePersistence(app.UserTokenCache);
+            else
+            {
+                // Remove any persistence hooks (in-memory only)
+                app.UserTokenCache.SetBeforeAccess(args => { });
+                app.UserTokenCache.SetAfterAccess(args => { });
+            }
 
             string[] scopes = new string[] { "https://database.windows.net//.default" };
 
             try
             {
-                // Check for cached accounts
                 var accounts = await app.GetAccountsAsync();
                 if (accounts == null || !accounts.Any())
                 {
-                    MessageBox.Show("No cached accounts found. Please log in into EntraID F.", "Authentication Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("No cached accounts found. Please log in into EntraID first.", "Authentication Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return await app.AcquireTokenInteractive(scopes).ExecuteAsync();
                 }
 
-                // Display the account name being used
                 var account = accounts.FirstOrDefault();
-          
                 if (account != null)
                 {
                     MessageBox.Show($"Attempting silent authentication for account: {account.Username}", "Silent Authentication", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                // Try silent authentication
                 return await app.AcquireTokenSilent(scopes, account).ExecuteAsync();
             }
             catch (MsalUiRequiredException)
             {
-                // Fallback to interactive authentication
                 MessageBox.Show("Silent authentication failed. Please log in interactively.", "Authentication Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return await app.AcquireTokenInteractive(scopes).ExecuteAsync();
             }
@@ -111,12 +113,12 @@ TrustServerCertificate=True;";
 
             try
             {
-                // Acquire the user's Entra ID token
-                var result = await LoginAsync();
+                // Use checkbox1 to determine cache persistence
+                var result = await LoginAsync(checkBox1.Checked);
 
                 using (var conn = new SqlConnection(connectionString))
                 {
-                    conn.AccessToken = result.AccessToken; // Set the token directly
+                    conn.AccessToken = result.AccessToken;
                     conn.Open();
                     MessageBox.Show("Connection successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -153,11 +155,12 @@ TrustServerCertificate=True;";
 
             try
             {
-                var result = await LoginAsync(); // Acquire token
+                // Use checkbox1 to determine cache persistence
+                var result = await LoginAsync(checkBox1.Checked);
 
                 using (var conn = new SqlConnection(connectionString))
                 {
-                    conn.AccessToken = result.AccessToken; // Set the token
+                    conn.AccessToken = result.AccessToken;
                     await conn.OpenAsync();
 
                     using (var cmd = new SqlCommand("SELECT TOP (1000) [FirstName], [MiddleName], [LastName] FROM [AdventureWorks2019].[Person].[Person]", conn))
