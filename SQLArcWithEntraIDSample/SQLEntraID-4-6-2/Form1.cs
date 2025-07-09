@@ -57,8 +57,8 @@ namespace SQLEntraID_4_6_2
 
         private async Task<AuthenticationResult> LoginAsync()
         {
-            var app = PublicClientApplicationBuilder.Create("EnterApplicationID")
-                .WithAuthority(AzureCloudInstance.AzurePublic, "EnterYourTenantID")
+            var app = PublicClientApplicationBuilder.Create("65fd1e99-ac4a-4d12-8519-9dc0c48a1702")
+                .WithAuthority(AzureCloudInstance.AzurePublic, "7da854e2-6115-4de1-bf5a-9e7af4fc3c98")
                 .WithRedirectUri("http://localhost")
                 .WithLogging((level, message, containsPii) => Debug.WriteLine($"MSAL: {message}"), LogLevel.Verbose, true, true)
                 .Build();
@@ -104,7 +104,7 @@ namespace SQLEntraID_4_6_2
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Server=YOURSQLSERVERIP;
+            string connectionString = @"Server=192.168.88.198;
 Database=AdventureWorks2019;
 Encrypt=True;
 TrustServerCertificate=True;";
