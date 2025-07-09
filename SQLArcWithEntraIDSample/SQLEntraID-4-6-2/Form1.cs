@@ -104,7 +104,7 @@ namespace SQLEntraID_4_6_2
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Server=192.168.88.198;
+            string connectionString = @"Server=YOURSQLSERVERIP;
 Database=AdventureWorks2019;
 Encrypt=True;
 TrustServerCertificate=True;";
