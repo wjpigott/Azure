@@ -7,7 +7,8 @@ Within the code there are only a few areas to make changes. Enter in your Applic
 ![image](https://github.com/user-attachments/assets/bb2a6ca1-311c-4bb3-b172-c62ee70bd6c3)
 
 
-Requirements: Follow the documentation for enabling SQL Server authentication with EntraID https://learn.microsoft.com/en-us/sql/relational-databases/security/authentication-access/azure-ad-authentication-sql-server-setup-tutorial?view=sql-server-ver17. 
+Requirements: Follow the documentation for enabling SQL Server authentication with EntraID. This link describes how to add EntraID to the Arc SQL Server, add a Key Vault with a self signed certificate that is used.  
+https://learn.microsoft.com/en-us/sql/relational-databases/security/authentication-access/azure-ad-authentication-sql-server-setup-tutorial?view=sql-server-ver17. 
 
 This is a great place to start for testing and using EntraID with SSMS and sets most of the configuration needed for this sample.
 API permissions.
