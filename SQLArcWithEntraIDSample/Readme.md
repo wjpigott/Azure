@@ -10,7 +10,8 @@ Requirements: Follow the documentation for enabling SQL Server authentication wi
 . 
 
 This is a great place to start for testing and using EntraID with SSMS and sets most of the configuration needed for this sample.
-API permissions.
+
+## API permissions.
 
 ## The application requires EntraID permissions for Azure SQL Database to access from the Winform application
 Select add a new permission, and select the tab "APIs my organization uses". Search for Azure SQL Database in the list.
