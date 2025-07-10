@@ -55,8 +55,8 @@ namespace SQLEntraID_4_6_2
         }
 
         // Use a static app instance for in-memory cache to work across calls
-        private static IPublicClientApplication app = PublicClientApplicationBuilder.Create("YourApplicationID")
-            .WithAuthority(AzureCloudInstance.AzurePublic, "YourTenantID")
+        private static IPublicClientApplication app = PublicClientApplicationBuilder.Create("65fd1e99-ac4a-4d12-8519-9dc0c48a1702")
+            .WithAuthority(AzureCloudInstance.AzurePublic, "7da854e2-6115-4de1-bf5a-9e7af4fc3c98")
             .WithRedirectUri("http://localhost")
             .WithLogging((level, message, containsPii) => Debug.WriteLine($"MSAL: {message}"), LogLevel.Verbose, true, true)
             .Build();
@@ -106,10 +106,9 @@ namespace SQLEntraID_4_6_2
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Server=YourSQLIPADDRESS;
-Database=AdventureWorks2019;
-Encrypt=True;
-TrustServerCertificate=True;";
+            string connectionString = "Server=" + txtSqlServer.Text +
+     ";Database=AdventureWorks2019;Encrypt=True;TrustServerCertificate=True;";
+
 
             try
             {
@@ -129,22 +128,22 @@ TrustServerCertificate=True;";
             }
         }
 
-private async void button2_Click(object sender, EventArgs e)
-{
-    var accounts = await app.GetAccountsAsync();
-    var account = accounts.FirstOrDefault();
+        private async void button2_Click(object sender, EventArgs e)
+        {
+            var accounts = await app.GetAccountsAsync();
+            var account = accounts.FirstOrDefault();
 
-    if (account != null)
-    {
-        MessageBox.Show($"Authenticated with Entra ID as: {account.Username}", "User Check", MessageBoxButtons.OK, MessageBoxIcon.Information);
-    }
-    else
-    {
-        string domain = Environment.UserDomainName;
-        string username = Environment.UserName;
-        MessageBox.Show($"Not authenticated with Entra ID in this app. Current Windows user: {domain}\\{username}", "User Check", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-    }
-}
+            if (account != null)
+            {
+                MessageBox.Show($"Authenticated with Entra ID as: {account.Username}", "User Check", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                string domain = Environment.UserDomainName;
+                string username = Environment.UserName;
+                MessageBox.Show($"Not authenticated with Entra ID in this app. Current Windows user: {domain}\\{username}", "User Check", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
 
         private async Task<DataTable> FetchDataAsync()
         {

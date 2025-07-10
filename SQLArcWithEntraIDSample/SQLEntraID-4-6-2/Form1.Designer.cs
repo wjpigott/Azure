@@ -34,6 +34,8 @@
             this.button3 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.txtSqlServer = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -68,11 +70,11 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(93, 87);
+            this.dataGridView1.Location = new System.Drawing.Point(93, 121);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 31;
-            this.dataGridView1.Size = new System.Drawing.Size(564, 183);
+            this.dataGridView1.Size = new System.Drawing.Size(564, 273);
             this.dataGridView1.TabIndex = 2;
             // 
             // button3
@@ -88,6 +90,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.txtSqlServer);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button3);
@@ -96,7 +100,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(642, 68);
+            this.groupBox1.Size = new System.Drawing.Size(642, 100);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
@@ -111,11 +115,28 @@
             this.checkBox1.Text = "Cache Token to Disk";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // txtSqlServer
+            // 
+            this.txtSqlServer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txtSqlServer.Location = new System.Drawing.Point(450, 69);
+            this.txtSqlServer.Name = "txtSqlServer";
+            this.txtSqlServer.Size = new System.Drawing.Size(164, 20);
+            this.txtSqlServer.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(370, 72);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(62, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "SQL Server";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(663, 276);
+            this.ClientSize = new System.Drawing.Size(663, 400);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -136,6 +157,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtSqlServer;
     }
 }
 
