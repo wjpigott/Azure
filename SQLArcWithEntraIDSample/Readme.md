@@ -2,9 +2,10 @@
 This sample uses EntraID from an Arc Enabled SQL Server to query the SQL database in a Winform app. The requirement was to use .NET 4.6.2. 
 This sample has a button for checking the current user, a button to connect with SQL using a cached EntraID if it exists. If there is no cached token it will prompt the user for the user to use, and then cache this token. The final button connects to Adventureworks database. The checkbox allows the sample to cache the token to disk or keep it in memory. If the file is cached to disk, the location of the cached file is (C:\Users\\[useraccount]\AppData\Local).
 
-Within the code there are only a few areas to make changes. Enter in your Application Registration Client ID, and the TenantID **(Line 60, 61 of Form1.cs)**. The database connection requires the IP Address of the SQL Server **(Line 107 of Form1.cs)**. 
+Within the code there are only a few areas to make changes. Enter in your Application Registration Client ID, and the TenantID **(Line 60, 61 of Form1.cs)**. 
 
-![image](https://github.com/user-attachments/assets/e9f25a2f-8702-41e8-85b5-9c064d1e834a)
+<img width="659" height="427" alt="image" src="https://github.com/user-attachments/assets/4507efe6-7ad7-40da-9c72-a6eef6ba549d" />
+
 
 Requirements: Follow the documentation for enabling SQL Server authentication with EntraID. This link describes how to add EntraID to the Arc SQL Server, add a Key Vault with a self signed certificate that is used.  [Set up Microsoft Entra authentication for SQL Server](https://learn.microsoft.com/en-us/sql/relational-databases/security/authentication-access/azure-ad-authentication-sql-server-setup-tutorial?view=sql-server-ver17)
 . 
