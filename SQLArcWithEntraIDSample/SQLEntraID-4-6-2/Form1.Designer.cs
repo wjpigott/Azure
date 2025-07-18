@@ -33,9 +33,9 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button3 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.txtSqlServer = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtSqlServer = new System.Windows.Forms.TextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -47,7 +47,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(267, 31);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Connect to EntraID at Login";
+            this.button1.Text = "Connect to Entra ID at Login";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -79,10 +79,10 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(315, 24);
+            this.button3.Location = new System.Drawing.Point(292, 30);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(83, 23);
+            this.button3.Size = new System.Drawing.Size(95, 31);
             this.button3.TabIndex = 3;
             this.button3.Text = "Load Data";
             this.button3.UseVisualStyleBackColor = true;
@@ -105,32 +105,32 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 78);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(62, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "SQL Server";
+            // 
+            // txtSqlServer
+            // 
+            this.txtSqlServer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txtSqlServer.Location = new System.Drawing.Point(86, 75);
+            this.txtSqlServer.Name = "txtSqlServer";
+            this.txtSqlServer.Size = new System.Drawing.Size(164, 20);
+            this.txtSqlServer.TabIndex = 5;
+            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(487, 30);
+            this.checkBox1.Location = new System.Drawing.Point(271, 78);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(127, 17);
             this.checkBox1.TabIndex = 4;
             this.checkBox1.Text = "Cache Token to Disk";
             this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // txtSqlServer
-            // 
-            this.txtSqlServer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtSqlServer.Location = new System.Drawing.Point(450, 69);
-            this.txtSqlServer.Name = "txtSqlServer";
-            this.txtSqlServer.Size = new System.Drawing.Size(164, 20);
-            this.txtSqlServer.TabIndex = 5;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(370, 72);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "SQL Server";
             // 
             // Form1
             // 
@@ -141,7 +141,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "SQL Arc Authentication with Entra ID";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

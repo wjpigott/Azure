@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Threading;
 using System.Threading.Tasks;
-using Azure.Core;
 using Azure.Identity;
 using Microsoft.Data.SqlClient;
 using System.Windows.Forms;
@@ -54,9 +52,9 @@ namespace SQLEntraID_4_6_2
             }
         }
 
-        // Use a static app instance for in-memory cache to work across calls
-        private static IPublicClientApplication app = PublicClientApplicationBuilder.Create("YourCLientApplicationID")
-            .WithAuthority(AzureCloudInstance.AzurePublic, "YourTenantID")
+        //Application registration ClientID, and TenantID are required for MSAL authentication
+        private static IPublicClientApplication app = PublicClientApplicationBuilder.Create("65fd1e99-ac4a-4d12-8519-9dc0c48a1702")
+            .WithAuthority(AzureCloudInstance.AzurePublic, "7da854e2-6115-4de1-bf5a-9e7af4fc3c98")
             .WithRedirectUri("http://localhost")
             .WithLogging((level, message, containsPii) => Debug.WriteLine($"MSAL: {message}"), LogLevel.Verbose, true, true)
             .Build();
@@ -80,7 +78,7 @@ namespace SQLEntraID_4_6_2
                 var accounts = await app.GetAccountsAsync();
                 if (accounts == null || !accounts.Any())
                 {
-                    MessageBox.Show("No cached accounts found. Please log in into EntraID first.", "Authentication Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("No cached accounts found. Please log in into Entra ID first.", "Authentication Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return await app.AcquireTokenInteractive(scopes).ExecuteAsync();
                 }
 
@@ -106,6 +104,12 @@ namespace SQLEntraID_4_6_2
 
         private async void button1_Click(object sender, EventArgs e)
         {
+            if (txtSqlServer.Text.Trim() == string.Empty)
+            {
+                MessageBox.Show("Please enter a valid SQL Server name.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             string connectionString = "Server=" + txtSqlServer.Text +
      ";Database=AdventureWorks2019;Encrypt=True;TrustServerCertificate=True;";
 
@@ -147,10 +151,8 @@ namespace SQLEntraID_4_6_2
 
         private async Task<DataTable> FetchDataAsync()
         {
-            string connectionString = @"Server=192.168.88.198;
-Database=AdventureWorks2019;
-Encrypt=True;
-TrustServerCertificate=True;";
+            string connectionString = "Server=" + txtSqlServer.Text +
+     ";Database=AdventureWorks2019;Encrypt=True;TrustServerCertificate=True;";
 
             var dataTable = new DataTable();
 
