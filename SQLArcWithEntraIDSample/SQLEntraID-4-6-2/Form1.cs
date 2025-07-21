@@ -109,7 +109,7 @@ namespace SQLEntraID_4_6_2
                 MessageBox.Show("Please enter a valid SQL Server name.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+ //For production workloads the TrustServerCertificate should be False from the connection string and use a Trusted Certificate Authority on the SQL Server
             string connectionString = "Server=" + txtSqlServer.Text +
      ";Database=AdventureWorks2019;Encrypt=True;TrustServerCertificate=True;";
 
