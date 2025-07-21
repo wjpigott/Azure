@@ -6,3 +6,28 @@
 
 ## SQLArcWithEntraIDSample Sample
 The SQLArcWithEntraIDSample Visual Studio project is a Winform example of how to use EntraID to connect to an Arc Enabled SQL Server. This form has options to cache the EntraID user token into memory or disk. It uses the Adventure Works database to pull up a small dataset of users to display in a datagrid. 
+
+## 📁 Downloading Specific Folders
+
+This repository contains multiple Azure-related samples organized by subfolder. If you only want to download a specific folder (e.g., `AUM_Scripts`, `SQLArcWithEntraIDSample`, etc.), here are a few easy options:
+
+---
+
+### ✅ Option 1: Use DownGit (No Git Required)
+
+You can download any folder as a ZIP file using [DownGit]
+- [Download the AUM_Scripts folder](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/wjpigott/Azure/tree/main/AUM_Scripts) the path to the folder you want.
+
+- [Download the SQLArcWithEntraIDSample folder](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/wjpigott/Azure/tree/main/SQLArcWithEntraIDSample) the path to the folder you want.
+
+---
+
+### ✅ Option 2: Use Git Sparse Checkout (Advanced Git Users)
+
+If you're comfortable with Git and want to clone only a specific folder:
+
+```bash
+git clone --filter=blob:none --no-checkout https://github.com/wjpigott/Azure.git
+cd Azure
+git sparse-checkout init --cone
+git sparse-checkout set SQLArcWithEntraIDSample  # Replace 'SQLArcWithEntraIDSample' with the folder you want
